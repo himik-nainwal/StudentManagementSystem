@@ -1,4 +1,5 @@
 #include<bits/stdc++.h>
+#include<conio.h>
 #include<fstream>
 using namespace std;
 class StudentManagementSystem
@@ -18,16 +19,19 @@ public:
                 //writing in file
                 addingDetails();
                 cout << "Adding file..." << endl;
-            } else if (action == 2)
+            }
+            else if (action == 2)
             {
                 //reading from file
                 viewStudentDetails();
                 cout << "Reading file..." << endl;
-            } else if (action == 3)
+            }
+            else if (action == 3)
             {
                 //deleting student from roll no.
                 cout << "Deleting file..." << endl;
-            } else if (action > 4)
+            }
+            else if (action > 4)
             {
                 cout << "Invalid option..." << endl;
             }
@@ -72,6 +76,13 @@ public:
         while (in >> sstr.rdbuf());
         cout << sstr.str() << endl;
         in.close();
+
+        cout << "Press Q to exit";
+        while (true) {
+            char quit = getch();
+            if (quit == 'Q' or quit == 'q')
+                return;
+        }
     }
     void deleteStudentDetails()
     {
@@ -87,16 +98,18 @@ public:
         if (sure == 'Y' or sure == 'y')
         {
             //delete record
-        } else {
+        }
+        else {
             cout << "Deleting process cancelled !";
         }
     }
     void ShowHeading()
     {
-        cout << "\t\t\t\t" << "****Student Management System****\n\t\t\t\tBy Harshit Bhatt" << endl;
+        cout << "\t\t\t\t" << "*Student Management System*\n\t\t\t\tBy Harshit Bhatt" << endl;
     }
     void ShowOptionsHomeScreen()
     {
+        system("cls");
         cout << "Select one option" << endl;
         cout << "1.Add Student Record\n" << "2.View Student Record\n" << "3.Delete Student Record\n" << "4.Quit" << endl;
     }
