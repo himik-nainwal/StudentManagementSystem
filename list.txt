@@ -1,2 +1,2 @@
-1	Harshit	jdbasj2	cjdsbcs	csdcsd1	acsdcsd	ahsha3	jaadu	adarsh1	rohit	double
-6	hamikl	ajaja
+1    harshit    addrsh    *
+2    dubey    hello    *

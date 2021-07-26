@@ -40,20 +40,20 @@ public:
         ShowHeading();
         ofstream studentList;
         studentList.open("list.txt", ios_base::app);
-        char name[20], address[100];
-        int rollno;
+        string name, address;
+        string rollno, space = "    ";
         cout << "Roll no: ";
         cin >> rollno;
         fflush(stdin);
         cout << "Name: ";
-        cin.getline(name, 20);
+        getline(cin, name);
         fflush(stdin);
         cout << "Address: ";
-        cin.getline(address, 100);
+        getline(cin, address);
         fflush(stdin);
         //writing data to file
-
-        studentList << rollno << "\t" << name << "\t" << address << "\n";
+        string final = rollno + space + name + space + address + space + "*" + "\n";
+        studentList << final;
         studentList.close();
 
         //recurtion call
@@ -71,7 +71,9 @@ public:
         string str;
         while (getline(studentList, str))
         {
-            cout << str;
+            if (str == "*")
+                cout << endl;
+            else cout << str;
         }
         studentList.close();
         char quit;
