@@ -10,6 +10,7 @@ public:
         cout << endl << endl;
         int action;
         do {
+            system("cls");
             ShowOptionsHomeScreen();
             cin >> action;
             if (action == 1)
@@ -35,6 +36,7 @@ public:
     }
     void addingDetails()
     {
+        system("cls");
         ShowHeading();
         ofstream studentList("list.txt", ios::app);
         char name[20], address[100];
@@ -62,8 +64,8 @@ public:
     }
     void viewStudentDetails()
     {
+        system("cls");
         ShowHeading();
-        char arr[10000];
         ifstream studentList("list.txt");
         studentList.getline(arr, 10000);
         cout << arr;
@@ -75,6 +77,7 @@ public:
     }
     void deleteStudentDetails()
     {
+        system("cls");
         ShowHeading();
         int roll;
 
