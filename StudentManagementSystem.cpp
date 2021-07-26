@@ -7,36 +7,39 @@ class StudentManagementSystem
 public:
     void MainMeat()
     {
+        system("cls");
         ShowHeading();
         cout << endl << endl;
-        int action;
-        do {
+        while (true) {
             system("cls");
             ShowOptionsHomeScreen();
-            cin >> action;
-            if (action == 1)
+            cout << "\t\t\t\t\t\t\t\t\t";
+            char action = getch();
+            if (action == '1')
             {
                 //writing in file
                 addingDetails();
-                cout << "Adding file..." << endl;
+                // cout << "Adding file..." << endl;
             }
-            else if (action == 2)
+            else if (action == '2')
             {
                 //reading from file
                 viewStudentDetails();
-                cout << "Reading file..." << endl;
+                // cout << "Reading file..." << endl;
             }
-            else if (action == 3)
+            else if (action == '3')
             {
                 //deleting student from roll no.
                 cout << "Deleting file..." << endl;
             }
-            else if (action > 4)
+            else if (action == '4')
             {
-                cout << "Invalid option..." << endl;
+                exit(0);
+            } else
+            {
+                cout << "Invalid input...";
             }
-        } while (action != 4);
-
+        }
     }
     void addingDetails()
     {
@@ -45,14 +48,14 @@ public:
         ofstream studentList;
         studentList.open("list.txt", ios_base::app);
         string name, address;
-        string rollno, space = "    ";
-        cout << "Roll no: ";
+        string rollno, space = "             ";
+        cout << "\t\t\t\t\t\t\t\t\tRoll no: ";
         cin >> rollno;
         fflush(stdin);
-        cout << "Name: ";
+        cout << "\t\t\t\t\t\t\t\t\tName: ";
         getline(cin, name);
         fflush(stdin);
-        cout << "Address: ";
+        cout << "\t\t\t\t\t\t\t\t\tAddress: ";
         getline(cin, address);
         fflush(stdin);
         //writing data to file
@@ -61,11 +64,16 @@ public:
         studentList.close();
 
         //recurtion call
-        char flag;
-        cout << "Do you want to add anothor data?(Y/N)" << endl;
-        cin >> flag;
-        if (flag == 'Y' or flag == 'y')
-            addingDetails();
+        cout << "\t\t\t\t\t\t\t\t\tDo you want to add anothor data?(Y/N)" << endl;
+        while (true) {
+            cout << "\t\t\t\t\t\t\t\t\t";
+            char flag = getch();
+            if (flag == 'Y' or flag == 'y')
+                addingDetails();
+            else if (flag == 'n' or flag == 'N')
+                return;
+        }
+
     }
     void viewStudentDetails()
     {
@@ -89,7 +97,6 @@ public:
         system("cls");
         ShowHeading();
         int roll;
-
         cout << "Input Student's Roll number: ";
         cin >> roll;
         char sure;
@@ -105,18 +112,70 @@ public:
     }
     void ShowHeading()
     {
-        cout << "\t\t\t\t" << "*Student Management System*\n\t\t\t\tBy Harshit Bhatt" << endl;
+        cout << "\t\t\t\t\t\t~~~~~~~~~~~~~~~~~~~~ Student MANAGEMENT SYSTEM ~~~~~~~~~~~~~~~~~~~~\n\t\t\t\t\t\t\t\t\t\t\t\t\tBy: Harshit Bhatt\n";
     }
     void ShowOptionsHomeScreen()
     {
         system("cls");
-        cout << "Select one option" << endl;
-        cout << "1.Add Student Record\n" << "2.View Student Record\n" << "3.Delete Student Record\n" << "4.Quit" << endl;
+        cout << "\t\t\t\t\t\t\t\t\tSelect one option" << endl;
+        cout << "\t\t\t\t\t\t\t\t\t1.Add Student Record\n" << "\t\t\t\t\t\t\t\t\t2.View Student Record\n" << "\t\t\t\t\t\t\t\t\t3.Delete Student Record\n" << "\t\t\t\t\t\t\t\t\t4.Quit" << endl;
+    }
+    void pass() {
+        system("cls");
+        int i = 0;
+        char s[21], str[21] = "Admin123", ch;
+        cout << "\n\t\t\t\t\t\t\t\t\tEnter Password: ";
+        while (true) {
+            ch = getch();
+            if (ch == 13) {
+                s[i] = '\0';
+                break;
+            }
+            else if (ch == 8 && i > 0) {
+                i--;
+                cout << "\b \b";
+            }
+            else {
+                cout << "*";
+                s[i] = ch;
+                i++;
+            }
+        }
+        ifstream inf("password.txt");
+        inf >> str;
+        inf.close();
+
+        for (i = 0; s[i] == str[i] && s[i] != '\0' && str[i] != '\0'; i++);
+        if (s[i] == '\0' && str[i] == '\0') {
+            system("cls");
+            MainMeat();
+        }
+        else {
+            cout << "\n\n\t\t\t\t\t\t\t\t\tWRONG PASSWORD!!\n\t\t\t\t\t\t\t\t\t";
+            system("PAUSE");
+            system("cls");
+            start();
+        }
+    }
+    void start() {
+        system("cls");
+        ShowHeading();
+        cout << "\n\t\t\t\t\t\t\t\t\t>>> LOGIN MENU <<<\n";;
+        cout << "\n\t\t\t\t\t\t\t\t\t1. Admin User\n\t\t\t\t\t\t\t\t\t2. Exit\n";
+        cout << "\t\t\t\t\t\t\t\t\t";
+
+        while (true) {
+            char quit = getch();
+            if (quit == '1')
+                pass();
+            else if (quit == '2')
+                exit(0);
+        }
     }
 };
 int main()
 {
     StudentManagementSystem st;
-    st.MainMeat();
+    st.start();
     return 0;
 }
