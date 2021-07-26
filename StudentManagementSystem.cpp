@@ -2,6 +2,8 @@
 #include<conio.h>
 #include<fstream>
 using namespace std;
+map<int, pair<string, string>> m;
+void record(int roll, string name, string address);
 class StudentManagementSystem
 {
 public:
@@ -24,12 +26,14 @@ public:
             else if (action == '2')
             {
                 //reading from file
-                viewStudentDetails();
+                // viewStudentDetails();
+                finalDeletion();
                 // cout << "Reading file..." << endl;
             }
             else if (action == '3')
             {
                 //deleting student from roll no.
+                deleteStudentDetails();
                 cout << "Deleting file..." << endl;
             }
             else if (action == '4')
@@ -45,12 +49,18 @@ public:
     {
         system("cls");
         ShowHeading();
+
+        // string ch;
+        // ifstream in("list.txt");
+
+
         ofstream studentList;
         studentList.open("list.txt", ios_base::app);
         string name, address;
         string rollno, space = "             ";
+        int rno;
         cout << "\t\t\t\t\t\t\t\t\tRoll no: ";
-        cin >> rollno;
+        cin >> rno;
         fflush(stdin);
         cout << "\t\t\t\t\t\t\t\t\tName: ";
         getline(cin, name);
@@ -59,9 +69,12 @@ public:
         getline(cin, address);
         fflush(stdin);
         //writing data to file
+        rollno = (rno - '0');
         string final = rollno + space + name + space + address + "\n";
         studentList << final;
         studentList.close();
+        //adding to set
+        record(rno, name, address);
 
         //recurtion call
         cout << "\t\t\t\t\t\t\t\t\tDo you want to add anothor data?(Y/N)" << endl;
@@ -92,22 +105,39 @@ public:
                 return;
         }
     }
+    void finalDeletion()
+    {
+        for (auto ch : m)
+        {
+            cout << ch.first << " ";
+            cout << ch.second.first << endl;
+            // cout << ch.second.second << endl;
+        }
+    }
     void deleteStudentDetails()
     {
         system("cls");
         ShowHeading();
         int roll;
-        cout << "Input Student's Roll number: ";
+        cout << "\t\t\t\t\t\t\t\t\tInput Student's Roll number: ";
         cin >> roll;
         char sure;
-        cout << "Are you sure you want to delete?(Y?N)";
-        cin >> sure;
-        if (sure == 'Y' or sure == 'y')
-        {
-            //delete record
-        }
-        else {
-            cout << "Deleting process cancelled !";
+        cout << "\t\t\t\t\t\t\t\t\tAre you sure you want to delete?(Y?N)";
+        while (true) {
+            sure = getch();
+            if (sure == 'Y' or sure == 'y')
+            {
+                finalDeletion();
+                cout << "\n\t\t\t\t\t\t\t\t\tRecord deleted successfully\n\t\t\t\t\t\t\t\t\t";
+                system("pause");
+                return;
+            }
+            else if (sure == 'N' or sure == 'n')
+            {
+                cout << "\n\t\t\t\t\t\t\t\t\tDeleting process cancelled !\n\t\t\t\t\t\t\t\t\t";
+                system("pause");
+                return;
+            }
         }
     }
     void ShowHeading()
@@ -117,11 +147,13 @@ public:
     void ShowOptionsHomeScreen()
     {
         system("cls");
+        ShowHeading();
         cout << "\t\t\t\t\t\t\t\t\tSelect one option" << endl;
         cout << "\t\t\t\t\t\t\t\t\t1.Add Student Record\n" << "\t\t\t\t\t\t\t\t\t2.View Student Record\n" << "\t\t\t\t\t\t\t\t\t3.Delete Student Record\n" << "\t\t\t\t\t\t\t\t\t4.Quit" << endl;
     }
     void pass() {
         system("cls");
+        ShowHeading();
         int i = 0;
         char s[21], str[21] = "Admin123", ch;
         cout << "\n\t\t\t\t\t\t\t\t\tEnter Password: ";
@@ -173,6 +205,10 @@ public:
         }
     }
 };
+void record(int roll, string name, string address)
+{
+    m[roll] = make_pair(name, address);
+}
 int main()
 {
     StudentManagementSystem st;
