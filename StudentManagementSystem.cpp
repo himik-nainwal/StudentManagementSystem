@@ -52,7 +52,7 @@ public:
         getline(cin, address);
         fflush(stdin);
         //writing data to file
-        string final = rollno + space + name + space + address + space + "*" + "\n";
+        string final = rollno + space + name + space + address + "\n";
         studentList << final;
         studentList.close();
 
@@ -67,15 +67,11 @@ public:
     {
         system("cls");
         ShowHeading();
-        ifstream studentList("list.txt");
-        string str;
-        while (getline(studentList, str))
-        {
-            if (str == "*")
-                cout << endl;
-            else cout << str;
-        }
-        studentList.close();
+        ifstream in("file.txt");
+        stringstream sstr;
+        while (in >> sstr.rdbuf());
+        cout << sstr.str() << endl;
+        in.close();
         char quit;
         cout << "Press Q to exit";
         cin >> quit;
