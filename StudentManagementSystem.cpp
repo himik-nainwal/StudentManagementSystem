@@ -1,6 +1,7 @@
 #include<bits/stdc++.h>
 #include<conio.h>
 #include<fstream>
+#include<algorithm>
 using namespace std;
 map<int, pair<string, string>> m;
 void record(int roll, string name, string address);
@@ -11,6 +12,7 @@ public:
     {
         system("cls");
         ShowHeading();
+        syncingData();
         cout << endl << endl;
         while (true) {
             system("cls");
@@ -26,8 +28,7 @@ public:
             else if (action == '2')
             {
                 //reading from file
-                // viewStudentDetails();
-                finalDeletion();
+                viewStudentDetails();
                 // cout << "Reading file..." << endl;
             }
             else if (action == '3')
@@ -45,22 +46,79 @@ public:
             }
         }
     }
+    void syncingAfterDeleting(string str)
+    {
+        ifstream in;
+        in.open("text.txt");
+        ofstream out;
+        out.open("text1.txt", ios_base::app);
+        string temp;
+        while (getline(in, temp))
+        {
+            if (temp != str)
+            {
+                out << temp << endl;
+            }
+        }
+        in.close();
+        out.close();
+        remove("text.txt");
+        rename("text1.txt", "text.txt");
+    }
+    void syncingData()
+    {
+        //syncing...
+        string ch;
+        ifstream in("list.txt");
+
+        if (in.is_open())
+        {
+            while (getline(in, ch))
+            {
+                int roll = 0;
+                int f = 0;
+                string name = "", address = "", temp = "";
+                for (int i = 0; i < ch.size(); i++)
+                {
+                    if (ch[i] != ' ')
+                    {
+                        temp += ch[i];
+                    }
+                    if (ch[i] == ' ' and ch[i - 1] != ' ')
+                    {
+                        f++;
+                        if (f == 1)
+                        {
+                            stringstream strintoint(temp);
+                            strintoint >> roll;
+                            temp = "";
+                        } else if (f == 2)
+                        {
+                            name = temp;
+                            temp = "";
+                        }
+                    }
+                }
+                address = temp;
+                temp = "";
+                record(roll, name, address);
+            }
+        }
+        in.close();
+    }
     void addingDetails()
     {
         system("cls");
         ShowHeading();
-
-        // string ch;
-        // ifstream in("list.txt");
-
+        syncingData();
 
         ofstream studentList;
         studentList.open("list.txt", ios_base::app);
         string name, address;
         string rollno, space = "             ";
-        int rno;
+        int rno = 0;
         cout << "\t\t\t\t\t\t\t\t\tRoll no: ";
-        cin >> rno;
+        cin >> rollno;
         fflush(stdin);
         cout << "\t\t\t\t\t\t\t\t\tName: ";
         getline(cin, name);
@@ -69,11 +127,12 @@ public:
         getline(cin, address);
         fflush(stdin);
         //writing data to file
-        rollno = (rno - '0');
         string final = rollno + space + name + space + address + "\n";
         studentList << final;
         studentList.close();
         //adding to set
+        stringstream strintoint(rollno);
+        strintoint >> rno;
         record(rno, name, address);
 
         //recurtion call
@@ -105,29 +164,37 @@ public:
                 return;
         }
     }
-    void finalDeletion()
+    void finalDeletion(int roll)
     {
-        for (auto ch : m)
+        auto it = m.begin();
+        it = m.find(roll);
+        string nameOfDeletingStudent, addressOdDeletingStudent;
+        if (it != m.end())
         {
-            cout << ch.first << " ";
-            cout << ch.second.first << endl;
-            // cout << ch.second.second << endl;
+            nameOfDeletingStudent = it->second.first;
+            addressOdDeletingStudent = it->second.second;
         }
-    }
-    void deleteStudentDetails()
-    {
-        system("cls");
-        ShowHeading();
-        int roll;
-        cout << "\t\t\t\t\t\t\t\t\tInput Student's Roll number: ";
-        cin >> roll;
+        else
+        {
+            cout << "Record not found";
+            deleteStudentDetails();
+        }
+        ostringstream str1;
+        str1 << roll;
+        string rollno = str1.str();
+        string space = "             ";
+        string deletRecord = rollno + space + nameOfDeletingStudent + space + addressOdDeletingStudent ;
+
+        cout << "\n" << deletRecord << endl;
+
         char sure;
-        cout << "\t\t\t\t\t\t\t\t\tAre you sure you want to delete?(Y?N)";
+        cout << "\t\t\t\t\t\t\t\t\tAre you sure you want to delete " << nameOfDeletingStudent << " from database?(Y?N)";
         while (true) {
             sure = getch();
             if (sure == 'Y' or sure == 'y')
             {
-                finalDeletion();
+                m.erase(roll);
+                syncingAfterDeleting(deletRecord);
                 cout << "\n\t\t\t\t\t\t\t\t\tRecord deleted successfully\n\t\t\t\t\t\t\t\t\t";
                 system("pause");
                 return;
@@ -139,6 +206,16 @@ public:
                 return;
             }
         }
+
+    }
+    void deleteStudentDetails()
+    {
+        system("cls");
+        ShowHeading();
+        int roll;
+        cout << "\t\t\t\t\t\t\t\t\tInput Student's Roll number: ";
+        cin >> roll;
+        finalDeletion(roll);
     }
     void ShowHeading()
     {
@@ -192,7 +269,7 @@ public:
     void start() {
         system("cls");
         ShowHeading();
-        cout << "\n\t\t\t\t\t\t\t\t\t>>> LOGIN MENU <<<\n";;
+        cout << "\n\t\t\t\t\t\t\t\t\t>>> LOGIN MENU <<<\n";
         cout << "\n\t\t\t\t\t\t\t\t\t1. Admin User\n\t\t\t\t\t\t\t\t\t2. Exit\n";
         cout << "\t\t\t\t\t\t\t\t\t";
 

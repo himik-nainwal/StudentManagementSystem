@@ -1,6 +1,5 @@
-#1             Harshit             Khatima
-#2             Devansh             brely
-#3             Dipanshu             Kiccha
-#4             Gaurav             G-Pay
-Ñ             Harshit             khatima
-Ò             laka             kkakak
+1             Harshit             khatima
+2             Bhumi             Ddhat
+3             Devansh             brly
+4             Tannu             Khatima
+5             Abhishek             Haridwar
