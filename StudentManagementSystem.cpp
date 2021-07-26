@@ -72,11 +72,6 @@ public:
         while (in >> sstr.rdbuf());
         cout << sstr.str() << endl;
         in.close();
-        char quit;
-        cout << "Press Q to exit";
-        quit = getchar();
-        if (quit == 'Q' or quit == 'q')
-            exit(0);
     }
     void deleteStudentDetails()
     {
