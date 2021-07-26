@@ -38,7 +38,8 @@ public:
     {
         system("cls");
         ShowHeading();
-        ofstream studentList("list.txt", ios::app);
+        ofstream studentList;
+        studentList.open("list.txt", ios_base::app);
         char name[20], address[100];
         int rollno;
         cout << "Roll no: ";
@@ -52,7 +53,7 @@ public:
         fflush(stdin);
         //writing data to file
 
-        studentList << rollno << "\t" << name << "\t" << address;
+        studentList << rollno << "\t" << name << "\t" << address << "\n";
         studentList.close();
 
         //recurtion call
@@ -67,8 +68,11 @@ public:
         system("cls");
         ShowHeading();
         ifstream studentList("list.txt");
-        studentList.getline(arr, 10000);
-        cout << arr;
+        string str;
+        while (getline(studentList, str))
+        {
+            cout << str;
+        }
         studentList.close();
         char quit;
         cout << "Press Q to exit";
