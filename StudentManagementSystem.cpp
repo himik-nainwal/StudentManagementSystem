@@ -46,24 +46,27 @@ public:
             }
         }
     }
-    void syncingAfterDeleting(string str)
+    void syncingAfterDeleting(string deleteline)
     {
-        ifstream in;
-        in.open("text.txt");
-        ofstream out;
-        out.open("text1.txt", ios_base::app);
-        string temp;
-        while (getline(in, temp))
+        string line;
+        ifstream fin;
+        fin.open("list.txt");
+        ofstream temp;
+        temp.open("temp.txt");
+
+
+        while (getline(fin, line))
         {
-            if (temp != str)
+            if (line != deleteline)
             {
-                out << temp << endl;
+                temp << line << endl;
             }
         }
-        in.close();
-        out.close();
-        remove("text.txt");
-        rename("text1.txt", "text.txt");
+
+        temp.close();
+        fin.close();
+        remove("list.txt");
+        rename("temp.txt", "list.txt");
     }
     void syncingData()
     {
@@ -183,9 +186,6 @@ public:
         str1 << roll;
         string rollno = str1.str();
         string space = "             ";
-        string deletRecord = rollno + space + nameOfDeletingStudent + space + addressOdDeletingStudent ;
-
-        cout << "\n" << deletRecord << endl;
 
         char sure;
         cout << "\t\t\t\t\t\t\t\t\tAre you sure you want to delete " << nameOfDeletingStudent << " from database?(Y?N)";
@@ -193,7 +193,7 @@ public:
             sure = getch();
             if (sure == 'Y' or sure == 'y')
             {
-                m.erase(roll);
+                string deletRecord = rollno + space + nameOfDeletingStudent + space + addressOdDeletingStudent;
                 syncingAfterDeleting(deletRecord);
                 cout << "\n\t\t\t\t\t\t\t\t\tRecord deleted successfully\n\t\t\t\t\t\t\t\t\t";
                 system("pause");
