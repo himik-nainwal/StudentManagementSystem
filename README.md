@@ -40,15 +40,7 @@ I'm Harshit exploring everything.
 - [@harshitbhatt69](https://www.github.com/harshitbhatt69)
 
   
-## 🔗 Connect with me
-<<<<<<< HEAD
-[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/harshit-bhatt-119b30186)
-[![twitter](https://img.shields.io/badge/twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/itsharshitb)
+## 🔗 Connect with me  
 
-  
-=======
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/harshit-bhatt-119b30186/)
 [![twitter](https://img.shields.io/badge/twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/itsharshitb)
-
-  
->>>>>>> d67e71c7697692cde2d054fe029107f9c8e15a71
