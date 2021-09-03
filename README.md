@@ -1,5 +1,5 @@
 
-# Student Management Syatem (SMS)
+# Student Management System (SMS)
 
 
 
@@ -18,7 +18,7 @@ To run this project
 
 1. Firstly clone the repo into your local system
 ```bash
-  git clone https://github.com/Harshitbhatt69/StudentManagementSystem.git
+  git clone https://github.com/himik-nainwal/StudentManagementSystem.git
 ```
 2. Run StudentManagementSystem.exe file.
 3. Enter password as "Admin123" to enter the management menu.
@@ -32,15 +32,14 @@ To run this project
 11. All data will be saved in list.txt file inside the root folder.
 12. Do star it if you like it !
 ## 🚀 About Me
-I'm Harshit exploring everything.
+I'm Himik learning everything.
 
   
 ## Authors
 
-- [@harshitbhatt69](https://www.github.com/harshitbhatt69)
+- [@himik-nainwal](https://github.com/himik-nainwal)
 
   
 ## 🔗 Connect with me  
 
-[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/harshit-bhatt-119b30186/)
-[![twitter](https://img.shields.io/badge/twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/itsharshitb)
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/himik-nainwal/)
